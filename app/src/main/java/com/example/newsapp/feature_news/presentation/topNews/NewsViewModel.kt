@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.newsapp.common.Resource
 import com.example.newsapp.feature_news.domain.model.Article
 import com.example.newsapp.feature_news.domain.use_case.GetArticlesUseCase
+import com.example.newsapp.feature_news.domain.use_case.SaveArticleUseCase
 import com.example.newsapp.feature_news.presentation.components.ArticleListState
+import com.example.newsapp.feature_news.presentation.components.ArticlesEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -20,7 +22,8 @@ const val PAGE_SIZE = 20
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val getArticlesUseCase: GetArticlesUseCase
+    private val getArticlesUseCase: GetArticlesUseCase,
+    private val saveArticleUseCase: SaveArticleUseCase
 ) : ViewModel() {
 
     private val _state = mutableStateOf(ArticleListState())
@@ -100,5 +103,16 @@ class NewsViewModel @Inject constructor(
     private fun resetState() {
         onChangeArticleScrollPosition(0)
         page.value = 1
+    }
+
+    fun onEvent(event: ArticlesEvent) {
+        when (event) {
+            is ArticlesEvent.SaveArticle -> {
+                viewModelScope.launch {
+                    saveArticleUseCase(event.article)
+                }
+            }
+            else -> {}
+        }
     }
 }

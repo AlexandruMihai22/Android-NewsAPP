@@ -1,5 +1,6 @@
 package com.example.newsapp.feature_news.presentation.bottomNav
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -8,6 +9,8 @@ import com.example.newsapp.feature_news.presentation.savedNews.SavedNewsScreen
 import com.example.newsapp.feature_news.presentation.searchNews.SearchNewsScreen
 import com.example.newsapp.feature_news.presentation.topNews.TopNewsScreen
 
+
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
     NavHost(

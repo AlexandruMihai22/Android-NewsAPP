@@ -1,7 +1,5 @@
 package com.example.newsapp.feature_news.presentation.savedNews
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -18,18 +16,16 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.newsapp.feature_news.domain.model.Article
 import com.example.newsapp.feature_news.presentation.components.ArticleListItem
 import com.example.newsapp.feature_news.presentation.components.ArticlesEvent
 import com.example.newsapp.feature_news.presentation.components.CustomTab
@@ -47,7 +43,11 @@ fun SavedNewsScreen (
             .fillMaxSize()
             .padding(bottom = 48.dp)
     ) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .semantics { contentDescription = "saved_article_list" }
+        ) {
             items(items = state.articles, key = { article -> article.url!! }) { article ->
                 val dismissState = rememberDismissState(
                     confirmStateChange = {

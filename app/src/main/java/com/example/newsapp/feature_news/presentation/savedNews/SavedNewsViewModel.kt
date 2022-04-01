@@ -58,11 +58,6 @@ class SavedNewsViewModel @Inject constructor(
 
     fun onEvent(event: ArticlesEvent) {
         when (event) {
-            is ArticlesEvent.SaveArticle -> {
-                viewModelScope.launch {
-                    saveArticleUseCase(event.article)
-                }
-            }
             is ArticlesEvent.DeleteArticle -> {
                 viewModelScope.launch {
                     val current = ArrayList(_state.value.articles)

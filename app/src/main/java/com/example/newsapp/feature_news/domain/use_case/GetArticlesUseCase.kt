@@ -1,7 +1,5 @@
 package com.example.newsapp.feature_news.domain.use_case
 
-import android.content.ContentValues
-import android.util.Log
 import com.example.newsapp.common.Resource
 import com.example.newsapp.feature_news.domain.model.Article
 import com.example.newsapp.feature_news.domain.repository.NewsRepository
@@ -17,7 +15,7 @@ class GetArticlesUseCase @Inject constructor(
 ) {
     operator fun invoke(countryCode: String, pageNumber: Int): Flow<Resource<List<Article>>> = flow {
         try {
-            emit(Resource.Loading<List<Article>>())
+            emit(Resource.Loading())
             val articles =  repository.getTopNews(countryCode, pageNumber).articles
             emit(Resource.Success<List<Article>>(articles))
         } catch(e: HttpException) {
