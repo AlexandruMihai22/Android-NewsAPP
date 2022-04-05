@@ -87,10 +87,6 @@ fun SearchNewsScreen (
                     background = Color.Green,
                     onSwipe = { viewModel.onEvent(ArticlesEvent.SaveArticle(article = article)) }
                 )
-                viewModel.onChangeArticleScrollPosition(index)
-                if ((index + 1) >= (page * PAGE_SIZE) && !state.isLoading) {
-                    viewModel.nextPage()
-                }
                 SwipeableActionsBox(
                     swipeThreshold = 60.dp,
                     startActions = listOf(saveArticle)
@@ -104,6 +100,11 @@ fun SearchNewsScreen (
                             }
                         )
                     }
+                }
+                // Pagination
+                viewModel.onChangeArticleScrollPosition(index)
+                if ((index + 1) >= (page * PAGE_SIZE) && !state.isLoading) {
+                    viewModel.nextPage()
                 }
             }
         }

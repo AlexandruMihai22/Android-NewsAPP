@@ -32,7 +32,7 @@ class SearchNewsViewModel @Inject constructor(
     // Article list
     private val _state = mutableStateOf(ArticleListState())
     val state: State<ArticleListState> = _state
-    private var curQuery = "a"
+    private var currQuery = "a"
     val page = mutableStateOf(1)
     private var articleListScrollPosition = 0
 
@@ -46,7 +46,7 @@ class SearchNewsViewModel @Inject constructor(
 
 
     init {
-        getArticles(query = curQuery)
+        getArticles(query = currQuery)
     }
 
      private fun getArticles(query: String) {
@@ -81,7 +81,7 @@ class SearchNewsViewModel @Inject constructor(
             is ArticlesEvent.SearchArticles -> {
                 viewModelScope.launch {
                     getArticles(event.query)
-                    curQuery = event.query
+                    currQuery = event.query
                 }
             }
             is ArticlesEvent.SaveArticle -> {
@@ -105,7 +105,7 @@ class SearchNewsViewModel @Inject constructor(
                 incrementPageNumber()
                 delay(200)
                 if (page.value > 1) {
-                    getSearchArticlesUseCase(curQuery, pageNumber = page.value).onEach { result ->
+                    getSearchArticlesUseCase(currQuery, pageNumber = page.value).onEach { result ->
                         when (result) {
                             is Resource.Success -> {
                                 result.data?.let { appendArticles(it) }

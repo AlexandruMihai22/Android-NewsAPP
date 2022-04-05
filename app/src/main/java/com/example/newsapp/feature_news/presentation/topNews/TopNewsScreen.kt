@@ -53,10 +53,6 @@ fun TopNewsScreen (
                     background = Green,
                     onSwipe = { viewModel.onEvent(ArticlesEvent.SaveArticle(article = article)) }
                 )
-                viewModel.onChangeArticleScrollPosition(index)
-                if ((index + 1) >= (page * PAGE_SIZE) && !state.isLoading) {
-                    viewModel.nextPage()
-                }
                 SwipeableActionsBox(
                     swipeThreshold = 60.dp,
                     modifier = Modifier.background(White),
@@ -71,6 +67,11 @@ fun TopNewsScreen (
                             }
                         )
                     }
+                }
+                // Pagination
+                viewModel.onChangeArticleScrollPosition(index)
+                if ((index + 1) >= (page * PAGE_SIZE) && !state.isLoading) {
+                    viewModel.nextPage()
                 }
             }
         }

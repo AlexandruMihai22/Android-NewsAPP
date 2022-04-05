@@ -1,9 +1,7 @@
 package com.example.newsapp.feature_news.presentation.savedNews
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.isDebugInspectorInfoEnabled
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.common.Resource
@@ -14,8 +12,6 @@ import com.example.newsapp.feature_news.domain.use_case.SaveArticleUseCase
 import com.example.newsapp.feature_news.presentation.components.ArticleListState
 import com.example.newsapp.feature_news.presentation.components.ArticlesEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

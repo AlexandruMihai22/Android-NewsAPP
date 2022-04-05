@@ -8,16 +8,16 @@ object CustomTab {
 
     private var builder: CustomTabsIntent? = null
     fun launch(context: Context, url: String) {
-            if (builder == null) {
-                builder = CustomTabsIntent.Builder()
-                    .setShowTitle(true)
-                    .setExitAnimations(
-                        context,
-                        android.R.anim.slide_in_left,
-                        android.R.anim.slide_out_right
-                    )
-                    .build()
-            }
-            builder?.launchUrl(context, Uri.parse(url))
+        if (builder == null) {
+            builder = CustomTabsIntent.Builder()
+                .setShowTitle(true)
+                .setExitAnimations(
+                    context,
+                    android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right
+                )
+                .build()
         }
+        builder?.launchUrl(context, Uri.parse(url))
     }
+}
