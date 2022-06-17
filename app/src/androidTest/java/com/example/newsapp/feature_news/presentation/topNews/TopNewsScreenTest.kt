@@ -51,6 +51,5 @@ class TopNewsScreenTest {
             .assertIsDisplayed()
             .onChildren()
             .assertCountEquals(5)
-
     }
 }
